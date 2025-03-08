@@ -1,0 +1,78 @@
+ERROR 2025-03-08 13:17:15,210 17684 18604 Internal Server Error: /api/book/books/1
+Traceback (most recent call last):
+  File "D:\library\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\library\.venv\lib\site-packages\django\utils\deprecation.py", line 131, in __call__
+    response = self.process_response(request, response)
+  File "D:\library\.venv\lib\site-packages\django\middleware\common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "D:\library\.venv\lib\site-packages\django\middleware\common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8000/api/book/books/1/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+ERROR 2025-03-08 13:17:15,212 17684 18604 "POST /api/book/books/1 HTTP/1.1" 500 79069
+WARNING 2025-03-08 13:17:24,669 17684 20824 Unauthorized: /api/book/books/1/
+WARNING 2025-03-08 13:17:24,670 17684 20824 "GET /api/book/books/1/ HTTP/1.1" 401 172
+WARNING 2025-03-08 13:35:39,579 17892 24816 Unauthorized: /api/register
+WARNING 2025-03-08 13:35:39,580 17892 24816 "POST /api/register HTTP/1.1" 401 58
+ERROR 2025-03-08 13:46:04,654 28036 14884 Internal Server Error: /api/register
+Traceback (most recent call last):
+  File "D:\library\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\library\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\library\.venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\library\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\library\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\library\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\library\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\library\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\library\.venv\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "D:\library\user\views.py", line 43, in register
+    logger.info(f"User registered successfully: {user.username} (ID: {user.id}) with role: {user.role}")
+AttributeError: 'CustomUser' object has no attribute 'role'
+ERROR 2025-03-08 13:46:04,658 28036 14884 "POST /api/register HTTP/1.1" 500 105430
+WARNING 2025-03-08 13:46:35,324 5180 9964 Bad Request: /api/register
+WARNING 2025-03-08 13:46:35,325 5180 9964 "POST /api/register HTTP/1.1" 400 59
+WARNING 2025-03-08 14:03:00,893 5180 9964 Unauthorized: /api/login/
+WARNING 2025-03-08 14:03:00,895 5180 9964 "POST /api/login/ HTTP/1.1" 401 63
+WARNING 2025-03-08 14:07:53,102 22508 21176 Unauthorized: /api/login/
+WARNING 2025-03-08 14:07:53,104 22508 21176 "POST /api/login/ HTTP/1.1" 401 63
+WARNING 2025-03-08 14:09:19,991 22508 21176 Unauthorized: /api/login/
+WARNING 2025-03-08 14:09:19,992 22508 21176 "POST /api/login/ HTTP/1.1" 401 63
+WARNING 2025-03-08 14:09:26,154 22508 21176 Unauthorized: /api/login/
+WARNING 2025-03-08 14:09:26,155 22508 21176 "POST /api/login/ HTTP/1.1" 401 63
+WARNING 2025-03-08 14:09:54,540 22508 20560 Not Found: /
+WARNING 2025-03-08 14:09:54,541 22508 20560 "GET / HTTP/1.1" 404 2457
+WARNING 2025-03-08 14:09:54,621 22508 20560 Not Found: /favicon.ico
+WARNING 2025-03-08 14:09:54,622 22508 20560 "GET /favicon.ico HTTP/1.1" 404 2508
+WARNING 2025-03-08 14:11:32,551 8264 18840 Not Found: /favicon.ico
+WARNING 2025-03-08 14:11:32,552 8264 18840 "GET /favicon.ico HTTP/1.1" 404 2508
+WARNING 2025-03-08 14:11:32,690 8264 24604 Not Found: /favicon.ico
+WARNING 2025-03-08 14:11:32,691 8264 24604 "GET /favicon.ico HTTP/1.1" 404 2508
+WARNING 2025-03-08 14:11:32,848 8264 12852 Not Found: /favicon.ico
+WARNING 2025-03-08 14:11:32,848 8264 12852 "GET /favicon.ico HTTP/1.1" 404 2508
+WARNING 2025-03-08 14:11:33,031 8264 24604 Not Found: /favicon.ico
+WARNING 2025-03-08 14:11:33,032 8264 24604 "GET /favicon.ico HTTP/1.1" 404 2508
+WARNING 2025-03-08 14:11:33,215 8264 12852 Not Found: /favicon.ico
+WARNING 2025-03-08 14:11:33,216 8264 12852 "GET /favicon.ico HTTP/1.1" 404 2508
+WARNING 2025-03-08 14:11:33,390 8264 12852 Not Found: /favicon.ico
+WARNING 2025-03-08 14:11:33,391 8264 12852 "GET /favicon.ico HTTP/1.1" 404 2508
+WARNING 2025-03-08 14:11:33,561 8264 23096 Not Found: /favicon.ico
+WARNING 2025-03-08 14:11:33,562 8264 23096 "GET /favicon.ico HTTP/1.1" 404 2508
+WARNING 2025-03-08 14:11:33,720 8264 18840 Not Found: /favicon.ico
+WARNING 2025-03-08 14:11:33,721 8264 18840 "GET /favicon.ico HTTP/1.1" 404 2508
+WARNING 2025-03-08 14:23:17,131 20260 28360 Unauthorized: /api/login/
+WARNING 2025-03-08 14:23:17,132 20260 28360 "POST /api/login/ HTTP/1.1" 401 63
+WARNING 2025-03-08 14:38:41,725 22148 22376 Unauthorized: /api/login/
+WARNING 2025-03-08 14:38:41,726 22148 22376 "POST /api/login/ HTTP/1.1" 401 63
+WARNING 2025-03-08 14:39:41,307 14600 6232 Unauthorized: /api/login/
+WARNING 2025-03-08 14:39:41,310 14600 6232 "POST /api/login/ HTTP/1.1" 401 63
+WARNING 2025-03-08 14:39:59,734 14600 6232 Unauthorized: /api/login/
+WARNING 2025-03-08 14:39:59,735 14600 6232 "POST /api/login/ HTTP/1.1" 401 63
