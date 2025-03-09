@@ -33,14 +33,14 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 def register(request):
     if request.method == 'POST':
         username = request.data.get('username', 'unknown')
-        roles = request.data.get('role', 'unknown')
+        role = request.data.get('role', 'unknown')
         
-        logger.info(f"Registration attempt for username: {username} with roles: {roles}")
+        logger.info(f"Registration attempt for username: {username} with role: {role}")
         
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
-            logger.info(f"User registered successfully: {user.username} (ID: {user.id}) with role: {user.roles}")
+            logger.info(f"User registered successfully: {user.username} (ID: {user.id}) with role: {user.role}")
             return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
         
         logger.warning(f"Registration failed for {username} due to validation errors: {serializer.errors}")

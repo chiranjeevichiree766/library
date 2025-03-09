@@ -21,6 +21,11 @@ def book_list_create(request):
         serializer = BookSerializer(books, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
+          
+        if not validate_role(request.user):
+           logger.warning(f"User {request.user.username} (ID: {request.user.id}) unauthorized to add a book")
+           return Response({"error": "You are not authorized to add books."}, status=status.HTTP_403_FORBIDDEN)
+                            
         logger.info(f"User {request.user.username} (ID: {request.user.id}) attempting to create new book: {request.data.get('title', 'unknown title')}")
         serializer = BookSerializer(data=request.data)
         if serializer.is_valid():
@@ -43,6 +48,9 @@ def book_detail(request, pk):
         serializer = BookSerializer(book)
         return Response(serializer.data)
     elif request.method == 'PUT':
+        if not validate_role(request.user):
+           logger.warning(f"User {request.user.username} (ID: {request.user.id}) unauthorized to add a book")
+           return Response({"error": "You are not authorized to add books."}, status=status.HTTP_403_FORBIDDEN)
         logger.info(f"User {request.user.username} attempting to update book: '{book.title}' (ID: {pk})")
         serializer = BookSerializer(book, data=request.data)
         if serializer.is_valid():
@@ -52,6 +60,9 @@ def book_detail(request, pk):
         logger.warning(f"Book update failed due to validation errors: {serializer.errors}")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
+        if not validate_role(request.user):
+           logger.warning(f"User {request.user.username} (ID: {request.user.id}) unauthorized to add a book")
+           return Response({"error": "You are not authorized to add books."}, status=status.HTTP_403_FORBIDDEN)
         book_title = book.title
         logger.info(f"User {request.user.username} attempting to delete book: '{book_title}' (ID: {pk})")
         book.delete()
@@ -62,6 +73,9 @@ def book_detail(request, pk):
 def borrow_book(request):
     book_id = request.data.get('book_id')
     user = request.user
+    if not validate_role1(request.user):
+           logger.warning(f"User {request.user.username} (ID: {request.user.id}) unauthorized to add a book")
+           return Response({"error": "You are not authorized to add books."}, status=status.HTTP_403_FORBIDDEN)
     logger.info(f"User {user.username} (ID: {user.id}) attempting to borrow book with ID: {book_id}")
 
     try:
@@ -84,6 +98,9 @@ def borrow_book(request):
 def return_book(request):
     borrowed_book_id = request.data.get('borrowed_book_id')
     user = request.user
+    if not validate_role1(request.user):
+          logger.warning(f"User {request.user.username} (ID: {request.user.id}) unauthorized to add a book")
+          return Response({"error": "You are not authorized to add books."}, status=status.HTTP_403_FORBIDDEN)
     logger.info(f"User {user.username} (ID: {user.id}) attempting to return borrowed book with ID: {borrowed_book_id}")
 
     try:
@@ -194,3 +211,10 @@ def delete_notification(request, notification_id):
     notification.delete()
 
     return Response({"message": "Notification deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+
+def validate_role(user):
+    allowed_roles = {'admin', 'librarian'}
+    return hasattr(user, 'role') and user.role in allowed_roles
+def validate_role1(user):
+    allowed_roles = {'member'}
+    return hasattr(user, 'role') and user.role in allowed_roles
